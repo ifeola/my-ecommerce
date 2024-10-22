@@ -1,34 +1,48 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import ProductsContext from "./utils/ProductsContext";
-import Products from "./components/Products";
 import useFetch from "./hooks/useFetch";
-import ProductDetails from "./components/ProductDetails";
 import Loading from "./components/Loading";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function App() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filter = searchParams.get("category");
+
+  const [productsPerPage, setProductsPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(1);
   const { products, isLoading, error } = useFetch(
     "https://dummyjson.com/products"
   );
 
   if (isLoading) return <Loading />;
   if (error) return <h1>Error: {error}</h1>;
-  const productList = products.products;
+  let productsList = products.products;
+
+  const lastPageIndex = productsPerPage * currentPage;
+  const firstPageIndex = lastPageIndex - productsPerPage;
+
+  let productList = filter
+    ? productsList.filter((product) => product.category === filter)
+    : productsList;
+  let productsToDisplay = productList.slice(firstPageIndex, lastPageIndex);
+
+  const pages = [];
+  for (let i = 1; i <= Math.ceil(productList.length / productsPerPage); i++) {
+    pages.push(i);
+  }
 
   return (
-    <ProductsContext.Provider value={{ productList, isLoading }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index path="/" element={<Products />} />
-            <Route
-              index
-              path="/products/:productId"
-              element={<ProductDetails />}
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+    <ProductsContext.Provider
+      value={{
+        productsToDisplay,
+        isLoading,
+        setCurrentPage,
+        pages,
+        currentPage,
+        productsList,
+      }}>
+      <Layout />
     </ProductsContext.Provider>
   );
 }

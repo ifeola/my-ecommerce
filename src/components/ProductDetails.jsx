@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "./Loading";
-import { Heart, ShoppingBasket, Star, StarIcon } from "lucide-react";
+import { Heart, ShoppingBasket, Star } from "lucide-react";
 import Counter from "./Counter";
 import useFormatDate from "../utils/useFormatDate";
 import StarRating from "./StarRating";
@@ -108,7 +108,7 @@ const ProductDetails = () => {
               {product.reviews.map((review) => {
                 return (
                   <li className="bg-neutral-50 p-4 border border-neutral-200">
-                    <span>
+                    <span className="block mb-2">
                       <StarRating starCount={review.rating} />
                     </span>
                     <p className="text-base font-normal">{review.comment}</p>
