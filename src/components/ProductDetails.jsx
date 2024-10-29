@@ -28,8 +28,10 @@ const ProductDetails = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <section className="max-w-5xl mx-auto mt-16 py-10">
-          <div key={product.id} className="grid grid-cols-2 items-start gap-12">
+        <section className="max-w-5xl mx-auto mt-16 py-10 px-4 lg:px-0">
+          <div
+            key={product.id}
+            className="grid grid-cols-1 md:grid-cols-2 items-start gap-6 lg:gap-12">
             <div className="border border-neutral-200 max-h-[32rem] h-full overflow-hidden bg-neutral-100">
               <img
                 src={product.images[0]}
@@ -71,20 +73,22 @@ const ProductDetails = () => {
                 <h5 className="text-sm font-medium">
                   Minimum Quantity: {product.minimumOrderQuantity}
                 </h5>
-                <div className="grid grid-cols-[auto_1fr_auto] gap-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-[auto_1fr]">
                   <Counter
                     minimumOrderQuantity={product.minimumOrderQuantity}
                   />
-                  <button className="flex text-center bg-purple-600 hover:bg-purple-700 text-white items-center justify-center text-nowrap">
-                    Add To Cart
-                    <ShoppingBasket className="w-5 ml-2" />
-                  </button>
-                  <button className="grid group place-content-center border border-neutral-600  px-2 hover:bg-neutral-700">
-                    <Heart className="group-hover:stroke-white stroke-neutral-600 w-5" />
-                  </button>
+                  <div className="grid gap-3 grid-cols-[1fr_auto] h-[2.125rem]">
+                    <button className="flex text-center bg-purple-600 hover:bg-purple-700 text-white items-center justify-center text-nowrap">
+                      Add To Cart
+                      <ShoppingBasket className="w-5 ml-2" />
+                    </button>
+                    <button className="grid group place-content-center border border-neutral-600  px-2 hover:bg-neutral-700">
+                      <Heart className="group-hover:stroke-white stroke-neutral-600 w-5" />
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="grid grid-cols-3 mt-4 border border-neutral-300 divide-x-2 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-3 mt-4 border border-neutral-300 divide-x-0 divide-y-[1px] sm:divide-x-[1px] sm:divide-y-0 text-sm">
                 <div className="p-2">
                   <h6 className="font-medium">Warranty Info:</h6>
                   <span>{product.warrantyInformation}</span>
@@ -104,7 +108,7 @@ const ProductDetails = () => {
             <h1 className="p-4 font-medium text-xl border border-neutral-200 mb-2">
               Verified Customer Feedback
             </h1>
-            <ul className="grid grid-cols-3 gap-3">
+            <ul className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {product.reviews.map((review) => {
                 return (
                   <li className="bg-neutral-50 p-4 border border-neutral-200">

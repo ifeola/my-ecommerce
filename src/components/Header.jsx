@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="w-full mx-auto h-16 flex items-center justify-center fixed top-0 left-0 border border-b-neutral-200 bg-neutral-50/5 backdrop-blur-md z-20">
+    <header className="w-full mx-auto h-16 flex items-center justify-center fixed top-0 left-0 border border-b-neutral-200 bg-neutral-50/5 backdrop-blur-md z-20 px-4 lg:px-0">
       <div className="max-w-5xl w-full h-full flex items-center justify-between">
         <Link to="/">Cartty.</Link>
         <nav>

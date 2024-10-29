@@ -14,13 +14,13 @@ const ProductList = ({
       {isLoading ? (
         <Loading />
       ) : (
-        <section className="max-w-5xl mx-auto mt-16 py-10">
+        <section className="max-w-5xl mx-auto mt-16 py-10 px-4 lg:px-0">
           <div className="grid grid-cols-5 gap-4 mb-4">
             <NavLink
               to="."
-              className={`border border-neutral-300 h-10 grid place-content-center hover:bg-neutral-300 ${({
-                isActive,
-              }) => (isActive ? "bg-neutral-300" : "bg-transparent")}`}>
+              className={`${({ isActive }) => {
+                return isActive ? "text-purple-600" : "text-black";
+              }}`}>
               All
             </NavLink>
             <NavLink
@@ -53,7 +53,7 @@ const ProductList = ({
             </NavLink>
           </div>
 
-          <ul className="grid grid-cols-3 items-center gap-6">
+          <ul className="grid grid-cols-1 items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => {
               return (
                 <Link
